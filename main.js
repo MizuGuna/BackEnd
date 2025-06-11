@@ -5,6 +5,7 @@ const { pool } = require('./db')
 const cors = require('cors');
 
 const app = express()
+// app.use(cors("https://sheets-mysql-sync-1.onrender.com/"));
 app.use(cors());
 
 app.get('/api/data', (req, res) => {
@@ -13,6 +14,7 @@ app.get('/api/data', (req, res) => {
             console.error('DB Error:', err);
             return res.status(500).json({ error: 'DB query failed' });
         }
+        // console.log(results)
         res.json(results);
     });
 });
@@ -36,5 +38,8 @@ const iteration = async () => {
         isRunning = false;
     }
 }
+
+// To start Updation of the table, - uncomment any of the below statements, - 1 minute, 10 seconds respectively
+
 // cron.schedule('* * * * *', iteration)
-setInterval(iteration, 10000);
+// setInterval(iteration, 10000);

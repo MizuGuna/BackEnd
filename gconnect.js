@@ -13,7 +13,7 @@ const readSpreedsheet = async function () {
         // const res = await sheets.spreadsheets.get({ spreadsheetId });
         // console.log(res.data.sheets.map(s => s.properties.title));
 
-        const range = "Sheet1!A2:D"
+        const range = "Sheet1!A2:F"
 
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId,

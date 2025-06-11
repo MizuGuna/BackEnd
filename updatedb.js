@@ -8,8 +8,9 @@ const updateDb = async () => {
             return;
         }
         console.log("Connection successfull!");
-        var sql = "REPLACE INTO Test(sno,datetime,temperature,ph) VALUES ?"
+        var sql = "REPLACE INTO Test(datetime,temperature,ph,tds,orp) VALUES ?"
         const values = await readSpreedsheet()
+        console.log(values)
         pool.query(sql, [values], function (err, result) {
             if (err) {
                 console.error("Error Occured during insert Query:", err);
