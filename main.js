@@ -81,7 +81,7 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-g
+
 app.get('/api/betweenData', (req, res) => {
     const { start, end } = req.query;
     if (!start || !end) {
