@@ -73,7 +73,7 @@ function DashboardTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://192.168.137.122:5754/api/data", {
+      const res = await fetch("http://10.9.65.129:5754/api/data", {
         method: "get",
         headers: new Headers({
           "ngrok-skip-browser-warning": 69420,
