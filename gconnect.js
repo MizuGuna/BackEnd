@@ -21,7 +21,7 @@ const readSpreedsheet = async function () {
         });
 
         const rows = response.data.values;
-        console.log(`VALUES:${rows}`)
+        // console.log(`VALUES:${rows}`)
         return rows;
     } catch (err) {
         console.error('Error reading spreadsheet:', err);

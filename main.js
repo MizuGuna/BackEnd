@@ -4,9 +4,10 @@ const express = require('express')
 const { pool } = require('./db')
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const verifyToken = require('./verificationMiddleware.js')
 
 const app = express()
-// app.use(cors("https://sheets-mysql-sync-1.onrender.com/"));
 app.use(express.json());
 app.use(cors());
 
@@ -54,6 +55,18 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
+app.get('/api/dashboard', verifyToken, (req, res) => {
+    pool.query('SELECT * FROM Test ORDER BY dateTime DESC LIMIT 40;', (err, results) => {
+        if (err) {
+            console.error('DB Error:', err);
+            return res.status(500).json({ error: 'DB query failed' });
+        }
+        // console.log(results)
+        res.json(results);
+    });
+});
+
+
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
 
@@ -72,7 +85,8 @@ app.post('/api/login', async (req, res) => {
         const match = await bcrypt.compare(password, hashedPassword);
 
         if (match) {
-            res.status(200).json({ message: "Login successful" });
+            let token = jwt.sign(username, process.env.SECRET_KEY)
+            res.status(200).json({ message: "Login successful", token: token });
         } else {
             res.status(401).json({ error: "Incorrect password" });
         }
