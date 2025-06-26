@@ -21,4 +21,15 @@ const updateDb = async () => {
     });
 }
 
+// const updateDb = async () => {
+//     try {
+//         const values = await readSpreedsheet();
+//         const sql = "REPLACE INTO Test(datetime, temperature, ph, tds, orp) VALUES ?";
+//         const [result] = await pool.promise().query(sql, [values]);
+//         console.log("Number of records inserted: " + result.affectedRows);
+//     } catch (err) {
+//         console.error("Error during DB update:", err);
+//     }
+// };
+
 module.exports = { updateDb }
